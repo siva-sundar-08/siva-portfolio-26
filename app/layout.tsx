@@ -5,6 +5,7 @@ import { modeInitScript } from "@/components/providers/ModeProvider";
 import { Providers } from "@/components/providers/Providers";
 import { Cursor } from "@/components/ui/Cursor";
 import { site } from "@/content/site";
+import { personId } from "@/lib/seo";
 import "@/styles/globals.css";
 
 const display = Anybody({
@@ -51,8 +52,6 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const personId = `${site.url}/#person`;
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -65,7 +64,18 @@ const jsonLd = {
       jobTitle: "Software Engineer — iOS & Web",
       description: site.description,
       sameAs: site.socials.map((s) => s.href),
-      worksFor: { "@type": "Organization", name: "ADRIG AI Technologies Pvt. Ltd." },
+      worksFor: {
+        "@type": "Organization",
+        name: "ADRIG AI Technologies Pvt. Ltd.",
+        url: "https://www.adrig.co.in/",
+        sameAs: ["https://in.linkedin.com/company/adrig"],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Chennai",
+          addressRegion: "Tamil Nadu",
+          addressCountry: "IN",
+        },
+      },
       alumniOf: { "@type": "CollegeOrUniversity", name: site.alumniOf },
       address: {
         "@type": "PostalAddress",

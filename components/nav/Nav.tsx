@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMode } from "@/components/providers/ModeProvider";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import { useSound } from "@/components/providers/SoundProvider";
-import { sections } from "@/content/site";
+import { pages, sections } from "@/content/site";
 import { cn } from "@/lib/cn";
 import { ease, spring } from "@/lib/motion";
 
@@ -15,8 +15,17 @@ const links = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
+  { id: "work", label: "Work" },
   { id: "contact", label: "Contact" },
 ] as const;
+
+/** HUD label for inner pages, from the first path segment. */
+function pageLabel(pathname: string): string {
+  const page = pages.find(
+    (p) => pathname === p.path || pathname.startsWith(`${p.path}/`),
+  );
+  return page?.label ?? "Off course";
+}
 
 function useActiveSection(enabled: boolean): string {
   const [active, setActive] = useState<string>("hero");
@@ -105,7 +114,7 @@ export function Nav() {
 
   const meta = isHome
     ? (sections.find((s) => s.id === active) ?? sections[0])
-    : { label: "Off course" };
+    : { label: pageLabel(pathname) };
 
   const href = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
@@ -219,6 +228,29 @@ export function Nav() {
                 </li>
               );
             })}
+            {pages
+              .filter((page) => page.path !== "/projects")
+              .map((page) => {
+                const current = pathname.startsWith(page.path);
+                return (
+                  <li key={page.path}>
+                    <Link
+                      href={page.path}
+                      aria-current={current ? "page" : undefined}
+                      className={cn(control, current && "text-ink")}
+                    >
+                      {current ? (
+                        <motion.span
+                          layoutId="nav-active"
+                          transition={spring.panel}
+                          className="absolute inset-0 rounded-full bg-white/[0.07]"
+                        />
+                      ) : null}
+                      <span className="relative">{page.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
           </ul>
 
           <span className="mx-1 hidden h-5 w-px bg-white/10 sm:block" aria-hidden />
@@ -287,6 +319,18 @@ export function Nav() {
                 {link.label}
               </motion.a>
             ))}
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              {pages.map((page) => (
+                <Link
+                  key={page.path}
+                  href={page.path}
+                  onClick={() => setMenuOpen(false)}
+                  className="hud text-ink transition-colors hover:text-accent"
+                >
+                  {page.label} →
+                </Link>
+              ))}
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

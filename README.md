@@ -52,16 +52,23 @@ variables → Actions → Variables).
 ```
 siva-portfolio-26/
 ├─ app/                 routes, metadata, sitemap, robots, OG image, icon
-│  └─ page.tsx          home (server component composing the sections)
+│  ├─ page.tsx          home (server component composing the sections)
+│  ├─ projects/         case-study index and /projects/[slug]
+│  ├─ blog/             article index and /blog/[slug]
+│  └─ services/         services, process and FAQ
 ├─ components/
 │  ├─ nav/              floating glass nav: progress ring, section HUD, sound, mode, menu
 │  ├─ providers/        Lenis smooth scroll, Void/Aurora mode, ambient sound
-│  └─ ui/               Cursor, Magnetic, ScrambleText, MorphHeading, SectionHeader, Footer
+│  ├─ content/          Prose: renders article blocks
+│  ├─ seo/              JsonLd
+│  └─ ui/               Cursor, Magnetic, ScrambleText, MorphHeading, SectionHeader, PageHeader, Footer
 ├─ features/            one folder per section
 │  ├─ hero/             scroll sequence, overlay, frame-sequence player, WebGL scene + GLSL
-│  └─ about/ skills/ experience/ contact/
-├─ content/             all copy and data, typed (site, skills, experience, hero)
-├─ lib/                 GSAP registration, motion presets, quality tiers, hooks
+│  └─ about/ skills/ experience/ work/ contact/
+├─ content/             all copy and data, typed (site, skills, experience, hero,
+│                       projects, posts, services)
+├─ lib/                 GSAP registration, motion presets, quality tiers, hooks,
+│                       seo (page metadata, breadcrumbs), text (dates, reading time)
 ├─ styles/globals.css   design tokens, glass/HUD utilities, view transitions, grain
 ├─ public/images/       portrait
 ├─ scripts/             extract-frames.sh

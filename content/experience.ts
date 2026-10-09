@@ -10,7 +10,8 @@ export const experience: ExperienceItem[] = [
     period: "Oct 2026 — Present",
     location: "Chennai, Tamil Nadu",
     mode: "On-site",
-    note: "Mobile application development and web development.",
+    note: "Building mobile and web applications at a Chennai AI company that delivers workflow automation, chatbots, LLM solutions and custom software for clients in India, the UK and the US.",
+    href: "https://www.adrig.co.in/",
     current: true,
   },
   {

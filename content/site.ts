@@ -55,7 +55,15 @@ export const sections = [
   { id: "about", label: "Operator" },
   { id: "skills", label: "Systems" },
   { id: "experience", label: "Trajectory" },
+  { id: "work", label: "Artifacts" },
   { id: "contact", label: "Uplink" },
+] as const;
+
+/** Inner pages, linked from the nav and footer so every page is a click from anywhere. */
+export const pages = [
+  { path: "/projects", label: "Projects" },
+  { path: "/services", label: "Services" },
+  { path: "/blog", label: "Blog" },
 ] as const;
 
 export type SectionId = (typeof sections)[number]["id"];

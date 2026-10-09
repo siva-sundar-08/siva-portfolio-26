@@ -5,6 +5,7 @@ import { Contact } from "@/features/contact/Contact";
 import { Experience } from "@/features/experience/Experience";
 import { Hero } from "@/features/hero/Hero";
 import { Skills } from "@/features/skills/Skills";
+import { Work } from "@/features/work/Work";
 
 /**
  * Each section sits in its own Suspense boundary so React hydrates them
@@ -23,6 +24,9 @@ export default function HomePage() {
         </Suspense>
         <Suspense>
           <Experience />
+        </Suspense>
+        <Suspense>
+          <Work />
         </Suspense>
         <Suspense>
           <Contact />
