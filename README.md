@@ -41,7 +41,7 @@ npm run dev                  # http://localhost:3000
 ## Structure
 
 ```
-next/
+siva-portfolio-26/
 ├─ app/                 routes, metadata, sitemap, robots, OG image, icon
 │  └─ page.tsx          home (server component composing the sections)
 ├─ components/
