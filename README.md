@@ -32,11 +32,20 @@ npm run dev                  # http://localhost:3000
 
 - `NEXT_PUBLIC_SITE_URL`: canonical origin for metadata, sitemap, robots and JSON-LD.
   Defaults to `https://sivasundar.world`.
-- `CONTACT_FORMSUBMIT_ID`: where the contact form's Server Action sends messages, via
+- `NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID`: where the contact form sends messages, via
   [FormSubmit](https://formsubmit.co). Use your email once to receive the activation
-  mail, then switch to the random alias it gives you so your address never appears
-  anywhere. If it's unset in development, messages are logged to the terminal. If it's
-  unset in production, the form politely refuses and points to LinkedIn.
+  mail, then switch to the random alias it gives you. The value is bundled into the
+  public JS, so never use your raw address. If it's unset in development, messages are
+  logged to the browser console. If it's unset in production, the form politely
+  refuses and points to LinkedIn.
+
+### Deployment (GitHub Pages)
+
+The site is a static export (`output: "export"`). Every push to `main` runs
+`.github/workflows/deploy.yml`, which builds `out/` and publishes it to GitHub Pages.
+`public/CNAME` serves it on `sivasundar.world`. In the repo, set the
+`NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID` Actions variable (Settings → Secrets and
+variables → Actions → Variables).
 
 ## Structure
 

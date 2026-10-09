@@ -1,5 +1,3 @@
-"use server";
-
 export type ContactState =
   | { status: "idle" }
   | { status: "success"; name: string; simulated: boolean }
@@ -13,9 +11,11 @@ export type ContactState =
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /**
- * Validates the contact form and relays it through FormSubmit's AJAX API.
- * Set CONTACT_FORMSUBMIT_ID to your FormSubmit email or random alias. Without
- * it, development logs the message and reports success; production refuses.
+ * Validates the contact form in the browser and relays it through FormSubmit's
+ * AJAX API (the site is a static export, so there is no server to do it).
+ * Set NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID to your FormSubmit random alias, not your
+ * raw email: it ships in the public JS bundle. Without it, development logs the
+ * message and reports success; production refuses.
  */
 export async function sendMessage(
   _prev: ContactState,
@@ -43,10 +43,13 @@ export async function sendMessage(
     return { status: "error", message: "Check the highlighted fields.", fields, values };
   }
 
-  const target = process.env.CONTACT_FORMSUBMIT_ID;
+  const target = process.env.NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID;
   if (!target) {
     if (process.env.NODE_ENV !== "production") {
-      console.info("[contact] CONTACT_FORMSUBMIT_ID not set; message not sent:", values);
+      console.info(
+        "[contact] NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID not set; message not sent:",
+        values,
+      );
       return { status: "success", name: values.name, simulated: true };
     }
     return {

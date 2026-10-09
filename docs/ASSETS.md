@@ -9,7 +9,7 @@ Everything below has a working placeholder today. Swap in the real thing wheneve
 | **OG image** (optional)        | Link previews                    | Generated in `app/opengraph-image.tsx`   | 1200×630 PNG, or keep the generated one                                             |
 | **Ambient sound** (optional)   | Sound toggle                     | Synthesised drone (Web Audio, no file)   | Seamless loop, 30–60 s, OGG + M4A, ≤ 500 KB                                         |
 | **Production domain**          | Canonical URLs, sitemap, JSON-LD | `https://sivasundar.world`               | Set `NEXT_PUBLIC_SITE_URL`                                                          |
-| **FormSubmit alias**           | Contact form delivery            | Messages logged in dev                   | Set `CONTACT_FORMSUBMIT_ID`                                                         |
+| **FormSubmit alias**           | Contact form delivery            | Messages logged in dev                   | Set `NEXT_PUBLIC_CONTACT_FORMSUBMIT_ID`                                             |
 
 Already migrated from the old site: portrait (`public/images/profile.jpg`, which was a JPEG
 named `.png`), bio, roles, skills, internships,

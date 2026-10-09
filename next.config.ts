@@ -2,8 +2,8 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Static HTML export for GitHub Pages (no Node server).
+  output: "export",
   turbopack: {
     // The repo root holds the old Vite app's lockfile; pin Turbopack to this app.
     root: path.resolve("."),
@@ -14,8 +14,9 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // GitHub Pages has no image optimizer; serve images as-is.
   images: {
-    formats: ["image/avif", "image/webp"],
+    unoptimized: true,
   },
 };
 
