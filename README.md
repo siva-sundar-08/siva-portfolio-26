@@ -31,7 +31,7 @@ npm run dev                  # http://localhost:3000
 ### Environment
 
 - `NEXT_PUBLIC_SITE_URL`: canonical origin for metadata, sitemap, robots and JSON-LD.
-  Defaults to `http://localhost:3000`.
+  Defaults to `https://sivasundar.world`.
 - `CONTACT_FORMSUBMIT_ID`: where the contact form's Server Action sends messages, via
   [FormSubmit](https://formsubmit.co). Use your email once to receive the activation
   mail, then switch to the random alias it gives you so your address never appears

@@ -25,15 +25,8 @@ export const metadata: Metadata = {
   title: { default: site.title, template: `%s — ${site.name}` },
   description: site.description,
   applicationName: `${site.name} Portfolio`,
-  authors: [{ name: site.name, url: site.socials[0].href }],
-  keywords: [
-    "iOS developer",
-    "SwiftUI",
-    "React",
-    "web developer",
-    "portfolio",
-    site.name,
-  ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -41,10 +34,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.title,
     description: site.description,
-    locale: "en_US",
+    locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
+    site: site.twitterHandle,
+    creator: site.twitterHandle,
     title: site.title,
     description: site.description,
   },
@@ -56,17 +51,48 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const personJsonLd = {
+const personId = `${site.url}/#person`;
+
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  url: site.url,
-  image: new URL(site.portrait.src, site.url).toString(),
-  jobTitle: site.roles.join(" & "),
-  description: site.description,
-  sameAs: site.socials.map((s) => s.href),
-  worksFor: { "@type": "Organization", name: "ADRIG AI Technologies Pvt. Ltd." },
-  knowsAbout: ["Swift", "SwiftUI", "iOS development", "React", "JavaScript", "Flutter"],
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: site.name,
+      url: site.url,
+      image: new URL(site.portrait.src, site.url).toString(),
+      jobTitle: "Software Engineer — iOS & Web",
+      description: site.description,
+      sameAs: site.socials.map((s) => s.href),
+      worksFor: { "@type": "Organization", name: "ADRIG AI Technologies Pvt. Ltd." },
+      alumniOf: { "@type": "CollegeOrUniversity", name: site.alumniOf },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.location.city,
+        addressRegion: site.location.region,
+        addressCountry: site.location.country,
+      },
+      knowsAbout: [
+        "iOS development",
+        "Swift",
+        "SwiftUI",
+        "SwiftData",
+        "UIKit",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Flutter",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      publisher: { "@id": personId },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -83,7 +109,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
         <Providers>

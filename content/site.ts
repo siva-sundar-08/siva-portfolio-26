@@ -6,9 +6,12 @@ export const site = {
   lastName: "Sundar",
   year: 2026,
   roles: ["iOS App Developer", "Web Developer"],
-  title: "Siva Sundar — iOS & Web Developer",
+  title: "Siva Sundar | iOS & SwiftUI Developer in Chennai",
   description:
-    "Siva Sundar is an iOS-focused developer building SwiftUI apps and motion-rich web interfaces.",
+    "Siva Sundar is an iOS developer in Chennai building fast, polished SwiftUI apps and motion-rich web interfaces with React and Next.js. View projects and contact.",
+  location: { city: "Chennai", region: "Tamil Nadu", country: "IN" },
+  alumniOf: "Sathyabama Institute of Science and Technology",
+  twitterHandle: "@sivaspectrum",
   tagline:
     "I build polished product interfaces with a bias toward motion, structure, and clean front-end execution across web and mobile.",
   bio: [
@@ -17,7 +20,11 @@ export const site = {
   ],
   cvUrl:
     "https://drive.google.com/file/d/1yU2qlXJwt_IL1XOZVh8M_uM00A78jgsI/view?usp=sharing",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // Production fallback so a missing env var never leaks localhost into canonical/OG/sitemap URLs.
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sivasundar.world").replace(
+    /\/$/,
+    "",
+  ),
   portrait: {
     src: "/images/profile.jpg",
     width: 896,
@@ -32,8 +39,13 @@ export const site = {
     },
     {
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/siva-sundar-g-b0636225a/",
-      handle: "siva-sundar-g",
+      href: "https://www.linkedin.com/in/siva-sundar-ios",
+      handle: "siva-sundar-ios",
+    },
+    {
+      label: "X",
+      href: "https://x.com/sivaspectrum",
+      handle: "@sivaspectrum",
     },
   ] satisfies SocialLink[],
 } as const;
